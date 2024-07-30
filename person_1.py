@@ -26,15 +26,22 @@ class Warrior(Person):
     # создали класс воина
     def __init__(self, name, age, height, weight):
         super().__init__(name, age, height, weight)
+        self.rage = 100
         # инициализировали атрибуты класса
+    def get_rage(self):
+        print('Заряд ярости равен: ' + str(self.rage))
+    def description(self):
+        description = self.name + ', его вес ' + str(self.weight) + ', его заряд ярости ' + str(self.rage)
+        # print('Новый воин создан: ' + description)
+        return description
+
+
 warrior = Warrior('Konan', 31, 210, 130)
-warrior.description()
-
-man = Person('Anakoliy', 31, 172, 90)
-man.description()
-
-woman = Person('Anastasia', 28, 156, 50)
-woman.description()
-
-# 8:34
-# https://stepik.org/lesson/740328/step/1?unit=741998
+# warrior.description()
+# warrior.get_rage()
+print('Новый воин создан: ' + warrior.description())
+# man = Person('Anakoliy', 31, 172, 90)
+# man.description()
+#
+# woman = Person('Anastasia', 28, 156, 50)
+# woman.description()
