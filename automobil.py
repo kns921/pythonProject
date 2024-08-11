@@ -1,14 +1,33 @@
-class Car():
+class Car:
     def __init__(self, model, year, volume_engine, price, mileage, wheels):
-        self.model = 'rocket'
-        self.year = 2024
-        self.volume_engine = 2000
-        self.price = 2000000
-        self.mileage = 0
+        self.model = model
+        self.year = year
+        self.volume_engine = volume_engine
+        self.price = price
+        self.mileage = mileage
         self.wheels = 4
 
-    # def car_description(self):
-    #     description = 'модель ' + self.model, 'год выпуска' + str(self.year), 'объем двигателя ' + str(self.volume_engine), 'price is ' + str(self.price), 'пробег ' + str(self.mileage), 'кол-во колес ' + str(self.wheels)
-    #     print('Новое авто: ' + description)
+    def car_description(self):
+        description = (f"Модель: {self.model}, "
+                       f"год выпуска: {self.year}, "
+                       f"объем двигателя: {self.volume_engine}, "
+                       f"цена: {self.price}, "
+                       f"пробег: {self.mileage}, "
+                       f"кол-во колес: {self.wheels}")
+        return description
 
-# car = Car()
+
+class Truck(Car):
+    def __init__(self, model, year, volume_engine, price, mileage, wheels):
+        super().__init__(model, year, volume_engine, price, mileage, wheels)
+
+    def update_wheels(self, wheels):
+        self.wheels = wheels
+
+
+car = Car('Tesla', 2023, 2000, 7000000, 1000, 4)
+print(car.car_description())
+
+truck = Truck('Volvo truck', 2024, 6000, 12000000, 0, 8)
+truck.update_wheels(8)
+print(truck.car_description())
