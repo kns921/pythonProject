@@ -1,8 +1,4 @@
-from selenium import
-import time   #для того, чтобы браузер не закрывался и можно было всё посмотреть
+from selenium import webriver
 
-driver = webdriver.Chrome()   #ни короткого пути, ни самого интерпретатора в папке нет
-driver.get('https://www.saucedemo.com/')
-driver.maximize_window()
-time.sleep(5) #для того, чтобы браузер не закрывался и можно было всё посмотреть
-driver.close()
+driver = webdriver.Chrome(executable_path = 'selenium-3.141.0/selenium/webdriver/chrome/chromedriver-mac-arm64/chromedriver')
+driver.get('https://www.saucedemo.com')
