@@ -55,3 +55,12 @@ var_filter_item.click()
 # time.sleep(2)
 # var_filter.send_keys(Keys.RETURN) # не сработало
 print('var_filter compete')
+
+
+driver.send_keys(Keys.COMMAND, 'x').
+
+# driver.send_keys(Keys.CTRL + 'x').
+
+driver.send_keys(Keys.CONTROL + 'x').
+
+# driver.send_keys(Keys.SHIFT, 'x').
