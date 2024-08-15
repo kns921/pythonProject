@@ -2,10 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-# driver = webdriver.Chrome(executable_path='selenium-3.141.0/selenium/webdriver/chrome')
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-options.add_argument('--headless')
+# options.add_argument('--headless')
 # запуск тестов без открытия браузера
 
 g = Service()
@@ -41,3 +40,6 @@ warrning_text = driver.find_element(By.XPATH, '//*[@id="login_button_container"]
 value_warrning_text = warrning_text.text
 assert value_warrning_text == 'Epic sadface: Username and password do not match any user in this service'
 print('Negative test - OK')
+
+driver.refresh()
+print('Refresh complete')

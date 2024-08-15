@@ -1,10 +1,12 @@
+import time
 from selenium import webdriver
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-options.add_argument('--headless')
+# options.add_argument('--headless')
 # запуск тестов без открытия браузера
 
 g = Service()
@@ -25,18 +27,31 @@ assert value_login_window == 'Swag Labs'
 print('OK')
 
 user_name = driver.find_element(By.XPATH, '//*[@id="user-name"]')
-user_name.send_keys(login_error_user)
-print('Input error username')
+user_name.send_keys(login_standart_user)
+print('Input username')
+
+# time.sleep(1)
+# user_name.send_keys(Keys.BACKSPACE)
+# time.sleep(1)
+# user_name.send_keys(Keys.BACKSPACE)
+# time.sleep(1)
+# user_name.send_keys('e')
+# time.sleep(1)
+# user_name.send_keys('r')
 
 user_password = driver.find_element(By.XPATH, '//*[@id="password"]')
 user_password.send_keys(password_all)
 print('Input password')
 
-button_login = driver.find_element(By.XPATH, '//*[@id="login-button"]')
-button_login.click()
-print('Click login button')
+user_name.send_keys(Keys.RETURN)
 
-warrning_text = driver.find_element(By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3')
-value_warrning_text = warrning_text.text
-assert value_warrning_text == 'Epic sadface: Username and password do not match any user in this service'
-print('Negative test - OK')
+var_filter = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/div/span/select')
+var_filter.click()
+time.sleep(2)
+
+var_filter_item = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/div/span/select/option[2]')
+var_filter_item.click()
+
+# time.sleep(2)
+# var_filter.send_keys(Keys.RETURN) # не сработало
+print('var_filter compete')

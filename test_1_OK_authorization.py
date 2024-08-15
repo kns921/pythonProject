@@ -2,10 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-# driver = webdriver.Chrome(executable_path='selenium-3.141.0/selenium/webdriver/chrome')
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-options.add_argument('--headless') # запуск тестов без открытия браузера
+options.add_argument('--headless')
+# запуск тестов без открытия браузера
 g = Service()
 driver = webdriver.Chrome(options=options, service=g)
 bace_url = 'https://www.saucedemo.com/'
