@@ -57,10 +57,10 @@ var_filter_item.click()
 print('var_filter compete')
 
 
-driver.send_keys(Keys.COMMAND, 'x').
+# driver.send_keys(Keys.COMMAND, 'X')
 
 # driver.send_keys(Keys.CTRL + 'x').
 
-driver.send_keys(Keys.CONTROL + 'x').
+# driver.send_keys(Keys.CONTROL + 'X')
 
 # driver.send_keys(Keys.SHIFT, 'x').
