@@ -84,7 +84,7 @@ print('Test basket OK  name page: ' + value_basket_page)
 
 # Screen Basket
 now_date = datetime.datetime.now().strftime("%H.%M.%S-%Y.%m.%d")
-name_screenshot = 'Basket Screenshot' + now_date + '.png'
+name_screenshot = 'Basket Screenshot ' + now_date + '.png'
 driver.save_screenshot(f'screenshots/{name_screenshot}')
 print(name_screenshot)
 
@@ -100,7 +100,7 @@ print(value_checkout_page)
 
 # Screen Checkout page
 now_date = datetime.datetime.now().strftime("%H.%M.%S-%Y.%m.%d")
-name_screenshot = 'Checkout page Screenshot' + now_date + '.png'
+name_screenshot = 'Checkout page Screenshot ' + now_date + '.png'
 driver.save_screenshot(f'screenshots/{name_screenshot}')
 print(name_screenshot)
 
@@ -130,7 +130,7 @@ print(value_overview_page)
 
 # Screen Overview
 now_date = datetime.datetime.now().strftime("%H.%M.%S-%Y.%m.%d")
-name_screenshot = 'Overview Screenshot' + now_date + '.png'
+name_screenshot = 'Overview Screenshot ' + now_date + '.png'
 driver.save_screenshot(f'screenshots/{name_screenshot}')
 print(name_screenshot)
 
@@ -198,6 +198,6 @@ print(complete_var)
 
 # Screen Complete
 now_date = datetime.datetime.now().strftime("%H.%M.%S-%Y.%m.%d")
-name_screenshot = 'Complete Screenshot' + now_date + '.png'
+name_screenshot = 'Complete Screenshot ' + now_date + '.png'
 driver.save_screenshot(f'screenshots/{name_screenshot}')
 print(name_screenshot)
