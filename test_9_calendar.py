@@ -8,6 +8,8 @@ from datetime import timedelta
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
+# запуск тестов без открытия браузера
+options.add_argument('--headless')
 g = Service()
 driver = webdriver.Chrome(options=options, service=g)
 bace_url = 'https://demoqa.com/date-picker'
