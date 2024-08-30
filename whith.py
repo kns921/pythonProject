@@ -5,5 +5,5 @@ data = 'Hello World'
 # fw.write(data)
 # fw.close()
 
-with open('../test/file_name', 'a') as f:
+with open('test/file_name', 'a') as f:
     f.write(data)
