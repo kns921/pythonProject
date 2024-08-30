@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 # запуск тестов без открытия браузера
-options.add_argument('--headless')
+# options.add_argument('--headless')
 g = Service()
 driver = webdriver.Chrome(options=options, service=g)
 bace_url = 'https://demoqa.com/browser-windows'
@@ -41,3 +41,4 @@ print(driver.current_url)
 header_win = driver.find_element(By.XPATH, '//*[@id="sampleHeading"]')
 header_win = header_win.text
 print('Header New Window: ' + header_win)
+
