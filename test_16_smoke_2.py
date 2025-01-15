@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 # запуск тестов без открытия браузера
-# options.add_argument('--headless')
+options.add_argument('--headless')
 g = Service()
 driver = webdriver.Chrome(options=options, service=g)
 bace_url = 'https://www.saucedemo.com/'
@@ -66,33 +66,40 @@ print(onesie.description())
 print(allTheThings.description())
 
 """Selection of goods"""
-product_add = int(input('Укажите номер товара '))
-if product_add == 1:
-    product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]')
-    product_var.click()
-    print('В корзину добавлен товар: ' + backpack.description())
-elif product_add == 2:
-    product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bike-light"]')
-    product_var.click()
-    print('В корзину добавлен товар: ' + light.description())
-elif product_add == 3:
-    product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]')
-    product_var.click()
-    print('В корзину добавлен товар: ' + shirt.description())
-elif product_add == 4:
-    product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]')
-    product_var.click()
-    print('В корзину добавлен товар: ' + jacket.description())
-elif product_add == 5:
-    product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-onesie"]')
-    product_var.click()
-    print('В корзину добавлен товар: ' + onesie.description())
-elif product_add == 6:
-    product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]')
-    product_var.click()
-    print('В корзину добавлен товар: ' + allTheThings.description())
-else:
-    print('Ошибка! Выберите другое значение.')
+
+
+def input_good_number():
+    product_add = int(input('Укажите номер товара '))
+    if product_add == 1:
+        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]')
+        product_var.click()
+        print('В корзину добавлен товар: ' + backpack.description())
+    elif product_add == 2:
+        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bike-light"]')
+        product_var.click()
+        print('В корзину добавлен товар: ' + light.description())
+    elif product_add == 3:
+        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]')
+        product_var.click()
+        print('В корзину добавлен товар: ' + shirt.description())
+    elif product_add == 4:
+        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]')
+        product_var.click()
+        print('В корзину добавлен товар: ' + jacket.description())
+    elif product_add == 5:
+        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-onesie"]')
+        product_var.click()
+        print('В корзину добавлен товар: ' + onesie.description())
+    elif product_add == 6:
+        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]')
+        product_var.click()
+        print('В корзину добавлен товар: ' + allTheThings.description())
+    else:
+        print('Ошибка! Выберите другое значение.')
+        input_good_number()
+
+
+input_good_number()
 
 """Basket"""
 basket = driver.find_element(By.XPATH, '//*[@id="shopping_cart_container"]/a')
@@ -118,7 +125,7 @@ print('Продолжаем оформление введите свои дан�
 
 first_name = input('Укажите Ваше Имя:')
 last_name = input('Укажите Вашу Фамилию:')
-post_code = int(input('Укажите Ваш почтовый индекс:'))
+post_code = input('Укажите Ваш почтовый индекс:')
 
 first_name_inp = driver.find_element(By.XPATH, '//*[@id="first-name"]')
 first_name_inp.send_keys(first_name)
@@ -187,15 +194,21 @@ print('Завершение оформления!')
 print('Выберите 1, если готовы к завершению')
 print('Выберите 0, если хотите отменить заказ')
 
-finish = int(input('Укажите 1 или 0: '))
-if finish == 1:
-    finish_var = driver.find_element(By.XPATH, '//*[@id="finish"]')
-    finish_var.click()
-    print('Спасибо за заказ!')
 
-elif finish == 0:
-    finish_var_cancel = driver.find_element(By.XPATH, '//*[@id="cancel"]')
-    finish_var_cancel.click()
-    print('Заказ отменен')
-else:
-    print('Ошибка! Выберите другое значение.')
+def fin():
+    finish = int(input('Укажите 1 или 0: '))
+    if finish == 1:
+        finish_var = driver.find_element(By.XPATH, '//*[@id="finish"]')
+        finish_var.click()
+        print('Спасибо за заказ!')
+
+    elif finish == 0:
+        finish_var_cancel = driver.find_element(By.XPATH, '//*[@id="cancel"]')
+        finish_var_cancel.click()
+        print('Заказ отменен')
+    else:
+        print('Ошибка! Выберите другое значение.')
+        fin()
+
+
+fin()

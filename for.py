@@ -5,3 +5,7 @@ for f in persons:
     #     var='Инженер ' + f
     #     print(var)
     print(len(f))
+print("----")
+
+a = 82 // 3**2 % 7
+print(a)
