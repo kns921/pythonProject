@@ -13,9 +13,8 @@ driver.get(bace_url)
 driver.maximize_window()
 
 """Autorization"""
-login_window = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]')
-value_login_window = login_window.text
-assert value_login_window == 'Swag Labs'
+login_window = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]').text
+assert login_window == 'Swag Labs'
 
 user_name = driver.find_element(By.XPATH, '//*[@id="user-name"]')
 user_name.send_keys('standard_user')
@@ -31,71 +30,40 @@ get_url = driver.current_url
 print(get_url)
 assert url_home == get_url
 
-text_product = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/span')
-value_text_product = text_product.text
-assert value_text_product == 'Products'
+text_product = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/span').text
+assert text_product == 'Products'
 
 """Goods"""
+products = driver.find_elements(By.XPATH, '//div[@class="inventory_item"]')
 
 
-class Cart:
-    def __init__(self, number, name, price):
-        self.number = number
-        self.name = name
-        self.price = price
-
-    def description(self):
-        description = str(self.number) + str(self.name) + str(self.price)
-        return description
+def search_product(index=0):
+    if index < len(products):
+        product = products[index]
+        product_name = product.find_element(By.XPATH, './/div[@class="inventory_item_name "]').text
+        product_price = product.find_element(By.XPATH, './/div[@class="inventory_item_price"]').text
+        print(f"{index + 1}. {product_name} - {product_price}")
+        search_product(index + 1)
 
 
-backpack = Cart(1, ' - Sauce Labs Backpack. ', '$29.99')
-light = Cart(2, ' - Sauce Labs Bike Light. ', '$9.99')
-shirt = Cart(3, ' - Sauce Labs Bolt T-Shirt. ', '$15.99')
-jacket = Cart(4, ' - Sauce Labs Fleece Jacket. ', '$49.99')
-onesie = Cart(5, ' - Sauce Labs Onesie. ', '$7.99')
-allTheThings = Cart(6, ' - Test.allTheThings() T-Shirt (Red). ', '$15.99')
-
-print("Приветствую тебя в нашем интернет магазине")
-print("Выбери один из следующих товаров и укажи его номер:")
-print(backpack.description())
-print(light.description())
-print(shirt.description())
-print(jacket.description())
-print(onesie.description())
-print(allTheThings.description())
+print("Список доступных товаров: ")
+search_product()
 
 """Selection of goods"""
 
 
 def input_good_number():
-    product_add = int(input('Укажите номер товара '))
-    if product_add == 1:
-        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]')
-        product_var.click()
-        print('В корзину добавлен товар: ' + backpack.description())
-    elif product_add == 2:
-        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bike-light"]')
-        product_var.click()
-        print('В корзину добавлен товар: ' + light.description())
-    elif product_add == 3:
-        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]')
-        product_var.click()
-        print('В корзину добавлен товар: ' + shirt.description())
-    elif product_add == 4:
-        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]')
-        product_var.click()
-        print('В корзину добавлен товар: ' + jacket.description())
-    elif product_add == 5:
-        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-onesie"]')
-        product_var.click()
-        print('В корзину добавлен товар: ' + onesie.description())
-    elif product_add == 6:
-        product_var = driver.find_element(By.XPATH, '//*[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]')
-        product_var.click()
-        print('В корзину добавлен товар: ' + allTheThings.description())
+    product_index = int(input("Укажите номер товара: ")) - 1
+    if 0 <= product_index < len(products):
+        product = products[product_index]
+        product_name = product.find_element(By.XPATH, './/div[@class="inventory_item_name "]').text
+        product_price = product.find_element(By.XPATH, './/div[@class="inventory_item_price"]').text
+        product_button = product.find_element(By.XPATH, './/button')
+
+        product_button.click()
+        print(f"В корзину добавлен товар: {product_name} - {product_price}")
     else:
-        print('Ошибка! Выберите другое значение.')
+        print("Ошибка! Вы выбрали некорректный номер товара.")
         input_good_number()
 
 
@@ -142,14 +110,12 @@ continue_button.click()
 
 """!!! Checkout: Overview"""
 # Overview page
-overview_page = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/span')
-value_overview_page = overview_page.text
-# print(value_overview_page)
+overview_page = driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/span').text
+# print(overview_page)
 
 # Checkout goods
-goods = driver.find_element(By.XPATH, '//*[@class="inventory_item_name"]')
-value_goods = goods.text
-# print('goods name: ' + value_goods)
+goods = driver.find_element(By.XPATH, '//*[@class="inventory_item_name"]').text
+# print('goods name: ' + goods)
 
 goods_price = driver.find_element(By.XPATH, '//*[@id="checkout_summary_container"]/div/div[1]/div[3]/div[2]/div['
                                             '2]/div')
