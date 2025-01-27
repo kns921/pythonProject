@@ -43,5 +43,5 @@ print('OK')
 
 now_date = datetime.datetime.now().strftime("%H.%M.%S-%Y.%m.%d")
 print(now_date)
-name_screenshot = 'Autorizatoin OK Screenshot ' + now_date + ' .png'
+name_screenshot = 'Screenshot ' + now_date + ' .png'
 driver.save_screenshot(f'screenshots/{name_screenshot}')

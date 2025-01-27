@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from login_page import LoginPage
 
 
-class TestT:
+class TestMall:
     def __init__(self):
         self.options = webdriver.ChromeOptions()
         self.options.add_experimental_option("detach", True)
-        # запуск тестов без открытия браузера
-        # self.options.add_argument('--headless')
+        # self.options.add_argument('--headless')   # запуск тестов без открытия браузера
         self.service = Service()
         self.base_url = 'https://www.saucedemo.com/'
         self.url_home = 'https://www.saucedemo.com/inventory.html'
+        self.header_locator = (By.XPATH, '//*[@id="header_container"]/div[2]/span')
+        self.error_value_locator = (By.XPATH, '//h3[@data-test="error"]')
+        self.error_button_locator = (By.XPATH, '//button[@class="error-button"]')
+        self.burger_button_locator = (By.XPATH, '//button[@id="react-burger-menu-btn"]')
+        self.logout_button_locator = (By.XPATH, '//a[@id="logout_sidebar_link"]')
         self.password = 'secret_sauce'
         self.users = [
             'standard_user',
@@ -25,45 +27,47 @@ class TestT:
             'visual_user'
         ]
 
-    def test_select_product(self):
-        browser = webdriver.Chrome(options=self.options, service=self.service)
-        browser.get(self.base_url)
-        browser.maximize_window()
-
-        """Autorization"""
-        login = LoginPage(browser)
-
+    def test_mall(self):
+        """Метод тестирования авторизации"""
+        driver = webdriver.Chrome(options=self.options, service=self.service)
+        driver.get(self.base_url)  # открытие страницы
+        driver.maximize_window()
+        """Авторизация"""
+        login = LoginPage(driver)
+        """Перебор пользователей циклом"""
         for usr in self.users:
-            # if usr ==
             login.authorization(login_name=usr, password=self.password)
+            try:
+                url_home = self.url_home
+                get_url = driver.current_url
+                assert url_home == get_url
+                print(get_url)
 
-            url_home = self.url_home
-            get_url = browser.current_url
-            assert url_home == get_url
-            print(get_url)
+                text_product = login.wait_elements(self.header_locator).text
+                assert text_product == 'Products'
+                print(f'Login Success: {usr}')
+                # выход из системы
+                self.logout_button(driver)
+            except AssertionError:
+                """Обработка исключения с заблокированным пользователем"""
+                error_value = login.wait_elements(self.error_value_locator).text
+                error_button = login.wait_elements(self.error_button_locator)
+                print(f'Error!: {error_value}')
+                error_button.click()
+        driver.quit()
+        print('Exit browser')
 
-            header_locator = (By.XPATH, '//*[@id="header_container"]/div[2]/span')
-            text_product = WebDriverWait(browser, 30).until(EC.element_to_be_clickable(header_locator)).text
-            assert text_product == 'Products'
-            print('Login success')
+    def logout_button(self, driver):
+        """Метод выхода из системы"""
+        login = LoginPage(driver)
 
-            self.logout_button(browser)
-
-    @staticmethod
-    def logout_button(browser):
-        burger_button_locator = (By.XPATH, '//button[@id="react-burger-menu-btn"]')
-        logout_button_locator = (By.XPATH, '//a[@id="logout_sidebar_link"]')
-
-        burger_button = WebDriverWait(browser, 30).until(EC.element_to_be_clickable(burger_button_locator))
-        browser.execute_script("arguments[0].click();", burger_button)
-        print('burger_button')
-        lg_button = WebDriverWait(browser, 30).until(EC.element_to_be_clickable(logout_button_locator))
+        burger_button = login.wait_elements(self.burger_button_locator)
+        burger_button.click()
+        print('Click Burger-button')
+        lg_button = login.wait_elements(self.logout_button_locator)
         lg_button.click()
-        print('lg_button')
+        print('Logout Success')
 
 
-# test = TestT()
-# browser_instance = test.test_select_product()
-# test.logout_button(browser_instance)
-test = TestT()
-test.test_select_product()
+test = TestMall()
+test.test_mall()
