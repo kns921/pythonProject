@@ -12,7 +12,7 @@ bace_url = 'https://www.lambdatest.com/selenium-playground/upload-file-demo'
 driver.get(bace_url)
 driver.maximize_window()
 
-path_upload = 'test/test.txt'
+path_upload = '../test.txt'
 
 click_upload = driver.find_element(By.XPATH, '//*[@id="file"]')
 

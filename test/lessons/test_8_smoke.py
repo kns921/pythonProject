@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 # запуск тестов без открытия браузера
-# options.add_argument('--headless')
+options.add_argument('--headless')
 g = Service()
 driver = webdriver.Chrome(options=options, service=g)
 bace_url = 'https://www.saucedemo.com/'
