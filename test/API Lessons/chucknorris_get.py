@@ -1,6 +1,7 @@
 import requests
 
 
+# https://api.chucknorris.io
 class TestNewJoke:
     """Создание новой шутки"""
 
@@ -20,18 +21,10 @@ class TestNewJoke:
         result.encoding = 'utf-8'
         print(result.text)
 
-        # check = result.json()
-        # check_info = check.get('categories')
-        # print(check_info)
-        # assert check_info == []
-        # print('Категория верна')
-        # check_info_value = check.get("value")
-        # print(check_info_value)
-        # name = "Chuck"
-        # if name in check_info_value:
-        #     print("Chuck присутствует")
-        # else:
-        #     print("Chuck отсутствует")
+        check = result.json()
+        print(f'"Категории: "{check}')
+
+
 
     def test_create_new_random_category_joke(self):
         category = 'sport'
@@ -54,8 +47,8 @@ class TestNewJoke:
         print('Категория верна')
 
 
-get_cateories = TestNewJoke()
-get_cateories.test_get_categories()
+get_categories = TestNewJoke()
+get_categories.test_get_categories()
 
-sport_joke = TestNewJoke()
-sport_joke.test_create_new_random_category_joke()
+# sport_joke = TestNewJoke()
+# sport_joke.test_create_new_random_category_joke()
