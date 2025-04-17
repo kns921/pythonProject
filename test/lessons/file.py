@@ -10,4 +10,3 @@ fw = open('../test1.txt', 'r')
 text = fw.read()
 fw.close()
 print(text)
-
