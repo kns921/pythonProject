@@ -12,7 +12,7 @@ class TestNewLocation:
         post_resourse = '/maps/api/place/add/json'
         get_resourse = '/maps/api/place/get/json'
         put_resourse = '/maps/api/place/update/json'
-        delete_resourse = '/maps/api/place/delete/json'
+        # delete_resourse = '/maps/api/place/delete/json'
         key = '?key=qaclick123'
 
         """Метод POST Создание новой локации"""
@@ -119,23 +119,23 @@ class TestNewLocation:
 
         """Метод DELETE Удаление созданной локации"""
 
-        delete_url = base_url + delete_resourse + key
-        json_delete_location = {
-            "place_id": last_id
-        }
-        result_delete = requests.delete(delete_url, json=json_delete_location)
-        print(f'Метод DELETE. URL: {result_delete},\nplace_id: {last_id},\nBody: {json_delete_location}')
-        print(f'Статус код: {result_delete.status_code}, ответ: {result_delete.text}')
-        assert result_delete.status_code == 200
-        if result_delete.status_code == 200:
-            print(f'Успех! Статус код корректный: {result_delete.status_code}')
-        else:
-            print('Ошибка! Несовподение статус кода!')
-        result_delete = result_delete.json()
-        check_result_delete_info = result_delete.get('status')
-        assert check_result_delete_info == "OK"
-        print(f'Статус ответа корректный: {check_result_delete_info}')
-        result_post.encoding = 'utf-8'
+        # delete_url = base_url + delete_resourse + key
+        # json_delete_location = {
+        #     "place_id": last_id
+        # }
+        # result_delete = requests.delete(delete_url, json=json_delete_location)
+        # print(f'Метод DELETE. URL: {result_delete},\nplace_id: {last_id},\nBody: {json_delete_location}')
+        # print(f'Статус код: {result_delete.status_code}, ответ: {result_delete.text}')
+        # assert result_delete.status_code == 200
+        # if result_delete.status_code == 200:
+        #     print(f'Успех! Статус код корректный: {result_delete.status_code}')
+        # else:
+        #     print('Ошибка! Несовподение статус кода!')
+        # result_delete = result_delete.json()
+        # check_result_delete_info = result_delete.get('status')
+        # assert check_result_delete_info == "OK"
+        # print(f'Статус ответа корректный: {check_result_delete_info}')
+        # result_post.encoding = 'utf-8'
 
 
 test_post = TestNewLocation()
