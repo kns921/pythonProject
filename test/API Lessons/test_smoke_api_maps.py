@@ -126,3 +126,4 @@ class TestNewLocation:
 
 test_post = TestNewLocation()
 test_post.test_create_new_location()
+# test
